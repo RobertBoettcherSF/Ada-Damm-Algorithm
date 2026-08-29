@@ -8,7 +8,8 @@ package body Damm_Algorithm is
    type Quasigroup_Table is array (Digit, Digit) of Digit;
    
    Table : constant Quasigroup_Table :=
-     ((0, 3, 1, 7, 5, 9, 8, 6, 4, 2),
+     (
+      (0, 3, 1, 7, 5, 9, 8, 6, 4, 2),
       (7, 0, 9, 2, 1, 5, 4, 8, 6, 3),
       (4, 2, 0, 6, 8, 7, 1, 3, 5, 9),
       (1, 7, 5, 0, 9, 8, 3, 4, 2, 6),
@@ -17,11 +18,12 @@ package body Damm_Algorithm is
       (5, 8, 6, 9, 7, 2, 0, 1, 3, 4),
       (8, 9, 4, 5, 3, 6, 2, 0, 1, 7),
       (9, 4, 3, 8, 6, 1, 7, 2, 0, 5),
-      (2, 5, 8, 1, 4, 3, 6, 7, 9, 0));
+      (2, 5, 8, 1, 4, 3, 6, 7, 9, 0)
+     );
 
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    --  Calculate_Check_Digit
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    function Calculate_Check_Digit (Number : Digit_Array) return Digit is
       Interim : Digit := 0;
    begin
@@ -37,9 +39,9 @@ package body Damm_Algorithm is
       return Interim;
    end Calculate_Check_Digit;
 
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    --  Verify_Number
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    function Verify_Number (Number : Digit_Array) return Boolean is
       Interim : Digit := 0;
    begin
@@ -56,9 +58,9 @@ package body Damm_Algorithm is
       return Interim = 0;
    end Verify_Number;
 
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    --  Append_Check_Digit
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    function Append_Check_Digit (Number : Digit_Array) return Digit_Array is
       Check_Digit : constant Digit := Calculate_Check_Digit (Number);
       Result      : Digit_Array (1 .. Number'Length + 1);
@@ -68,9 +70,9 @@ package body Damm_Algorithm is
       return Result;
    end Append_Check_Digit;
 
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    --  Calculate_Check_Digit_Str (String Variant)
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    function Calculate_Check_Digit_Str (Number : String) return Digit is
       Arr : Digit_Array (1 .. Number'Length);
    begin
@@ -89,9 +91,9 @@ package body Damm_Algorithm is
       return Calculate_Check_Digit (Arr);
    end Calculate_Check_Digit_Str;
 
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    --  Verify_Number_Str (String Variant)
-   -----------------------------------------------------------------------------
+   -------------------------------------------------------------------------
    function Verify_Number_Str (Number : String) return Boolean is
       Arr : Digit_Array (1 .. Number'Length);
    begin
