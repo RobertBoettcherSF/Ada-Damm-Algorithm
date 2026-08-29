@@ -10,7 +10,8 @@ package Damm_Algorithm is
    --  Custom array type for sequences of digits.
    type Digit_Array is array (Positive range <>) of Digit;
 
-   --  Exception raised when an empty sequence or invalid character is processed.
+   --  Exception raised when an empty sequence or invalid character
+   --  is processed.
    Invalid_Input : exception;
 
    --  Calculates the Damm check digit for an array of digits.
