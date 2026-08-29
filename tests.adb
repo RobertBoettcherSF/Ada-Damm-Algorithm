@@ -123,7 +123,7 @@ begin
            "Single digit calculation failed");
    Put_Line ("      PASS");
 
-   --  TEST 13 - Single Digit Base Verification
+   --  TEST 13 - Minimal Valid String Verification
    Put_Line ("TEST 13 - Minimal Valid String Verification");
    Put_Line ("  13.1 Assert ""59"" verifies as True");
    Assert (Verify_Number_Str ("59") = True,
