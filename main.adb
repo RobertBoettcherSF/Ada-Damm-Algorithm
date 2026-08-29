@@ -13,7 +13,6 @@ begin
    Check := Calculate_Check_Digit_Str (Test_Str);
    Put_Line ("Input Number: " & Test_Str);
    Put_Line ("Calculated Check Digit: " & Check'Image);
-   
    Is_Valid := Verify_Number_Str ("5724");
    Put_Line ("Verification of 5724: " & Boolean'Image (Is_Valid));
 end Main;
