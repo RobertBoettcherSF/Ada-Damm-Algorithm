@@ -1,10 +1,10 @@
--- damm_algorithm.adb
--- Implementation of the Damm Algorithm.
--- Uses the quasigroup of order 10 defined by H. Michael Damm.
+--  damm_algorithm.adb
+--  Implementation of the Damm Algorithm.
+--  Uses the quasigroup of order 10 defined by H. Michael Damm.
 
 package body Damm_Algorithm is
 
-   -- The totally anti-symmetric quasigroup 10x10 table.
+   --  The totally anti-symmetric quasigroup 10x10 table.
    type Quasigroup_Table is array (Digit, Digit) of Digit;
    
    Table : constant Quasigroup_Table :=
@@ -20,13 +20,14 @@ package body Damm_Algorithm is
       (2, 5, 8, 1, 4, 3, 6, 7, 9, 0));
 
    -----------------------------------------------------------------------------
-   -- Calculate_Check_Digit
+   --  Calculate_Check_Digit
    -----------------------------------------------------------------------------
    function Calculate_Check_Digit (Number : Digit_Array) return Digit is
       Interim : Digit := 0;
    begin
       if Number'Length = 0 then
-         raise Invalid_Input with "Cannot calculate check digit for empty array";
+         raise Invalid_Input with
+           "Cannot calculate check digit for empty array";
       end if;
 
       for I in Number'Range loop
@@ -37,25 +38,26 @@ package body Damm_Algorithm is
    end Calculate_Check_Digit;
 
    -----------------------------------------------------------------------------
-   -- Verify_Number
+   --  Verify_Number
    -----------------------------------------------------------------------------
    function Verify_Number (Number : Digit_Array) return Boolean is
       Interim : Digit := 0;
    begin
       if Number'Length < 2 then
-         raise Invalid_Input with "Number must have at least one digit and a check digit";
+         raise Invalid_Input with
+           "Number must have at least one digit and a check digit";
       end if;
 
       for I in Number'Range loop
          Interim := Table (Interim, Number (I));
       end loop;
       
-      -- Valid if the final interim value evaluates to 0
+      --  Valid if the final interim value evaluates to 0
       return Interim = 0;
    end Verify_Number;
 
    -----------------------------------------------------------------------------
-   -- Append_Check_Digit
+   --  Append_Check_Digit
    -----------------------------------------------------------------------------
    function Append_Check_Digit (Number : Digit_Array) return Digit_Array is
       Check_Digit : constant Digit := Calculate_Check_Digit (Number);
@@ -67,7 +69,7 @@ package body Damm_Algorithm is
    end Append_Check_Digit;
 
    -----------------------------------------------------------------------------
-   -- Calculate_Check_Digit_Str (String Variant)
+   --  Calculate_Check_Digit_Str (String Variant)
    -----------------------------------------------------------------------------
    function Calculate_Check_Digit_Str (Number : String) return Digit is
       Arr : Digit_Array (1 .. Number'Length);
@@ -80,27 +82,30 @@ package body Damm_Algorithm is
          if Number (I) not in '0' .. '9' then
             raise Invalid_Input with "String must contain only digits";
          end if;
-         Arr (I - Number'First + 1) := Digit'Value (String'(1 => Number (I)));
+         Arr (I - Number'First + 1) :=
+           Digit'Value (String'(1 => Number (I)));
       end loop;
       
       return Calculate_Check_Digit (Arr);
    end Calculate_Check_Digit_Str;
 
    -----------------------------------------------------------------------------
-   -- Verify_Number_Str (String Variant)
+   --  Verify_Number_Str (String Variant)
    -----------------------------------------------------------------------------
    function Verify_Number_Str (Number : String) return Boolean is
       Arr : Digit_Array (1 .. Number'Length);
    begin
       if Number'Length < 2 then
-         raise Invalid_Input with "String must contain at least 2 characters";
+         raise Invalid_Input with
+           "String must contain at least 2 characters";
       end if;
 
       for I in Number'Range loop
          if Number (I) not in '0' .. '9' then
             raise Invalid_Input with "String must contain only digits";
          end if;
-         Arr (I - Number'First + 1) := Digit'Value (String'(1 => Number (I)));
+         Arr (I - Number'First + 1) :=
+           Digit'Value (String'(1 => Number (I)));
       end loop;
       
       return Verify_Number (Arr);
